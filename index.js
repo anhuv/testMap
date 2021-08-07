@@ -15,10 +15,10 @@ function initMap() {
   document.getElementsByTagName("head")[0].appendChild(script);
   } */
 
-// Loop through the results array and place a marker for each
-// set of coordinates.
+  // Loop through the results array and place a marker for each
+  // set of coordinates.
 
-/* const eqfeed_callback = function (results) {
+  /* const eqfeed_callback = function (results) {
   for (let i = 0; i < results.features.length; i++) {
     const coords = results.features[i].geometry.coordinates;
     const latLng = new google.maps.LatLng(coords[1], coords[0]);
@@ -29,14 +29,16 @@ function initMap() {
   }
 
 }; */
-map.data.loadGeoJson(
+  map.data.loadGeoJson(
     "https://raw.githubusercontent.com/ungvietanh20172394/testMap/master/demo.json"
   );
-  
-  map.data.setStyle({
-    fillColor: "red",
-    strokeWeight: 1,
+
+  map.data.setStyle(function (feature) {
+    var color = feature.getProperty("fill");
+    console.log(color);
+    return {
+      fillColor: color,
+      strokeWeight: 1,
+    };
   });
-  
-  
-};
+}
